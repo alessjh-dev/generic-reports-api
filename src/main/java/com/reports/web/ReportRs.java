@@ -1,7 +1,6 @@
 package com.reports.web;
 
 import com.reports.svc.ReportsSvc;
-import lombok.SneakyThrows;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

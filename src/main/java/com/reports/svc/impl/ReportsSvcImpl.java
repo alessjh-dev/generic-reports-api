@@ -2,7 +2,6 @@ package com.reports.svc.impl;
 
 import com.reports.svc.ConnectionSvc;
 import com.reports.svc.ReportsSvc;
-import lombok.SneakyThrows;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;

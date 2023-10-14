@@ -21,9 +21,6 @@ public class ConnectionSvcImpl implements ConnectionSvc {
 
     @Override
     public Connection getConnection() throws SQLException {
-        String url = dataBaseUrl;
-        String user = dataBaseUserName;
-        String password = dataBasePassword;
-        return DriverManager.getConnection(url, user, password);
+        return DriverManager.getConnection(dataBaseUrl, dataBaseUserName, dataBasePassword);
     }
 }
