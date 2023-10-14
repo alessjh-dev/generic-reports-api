@@ -21,6 +21,11 @@ public class ReportRs {
     private static final String PDF = ".pdf";
     private static final String ATTACHMENT = "attachment";
 
+    @GetMapping("/test")
+    public ResponseEntity<String> test() {
+        return new ResponseEntity<>("Aplicación funcionando correctamente", HttpStatus.OK);
+    }
+
     @PostMapping("/{report-name}")
     public ResponseEntity<byte[]> generateRequestReport(@PathVariable("report-name") String reportName,
                                                         @RequestBody Map<String, Object> params) throws JRException, SQLException {
