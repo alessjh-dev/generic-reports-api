@@ -51,6 +51,7 @@
 where fecha >=  $P{INIT_DATE} 
 and fecha <= $P{FINAL_DATE} 
  and cuenta =  $P{ACCOUNT} 
+ and tipo_operacion = 'RESTA'
  order by fecha desc]]>
 		</queryString>
 		<field name="dbid" class="java.lang.Integer">
@@ -106,21 +107,6 @@ and fecha <= $P{FINAL_DATE}
 		<field name="cuenta" class="java.lang.Integer">
 			<property name="com.jaspersoft.studio.field.name" value="cuenta"/>
 			<property name="com.jaspersoft.studio.field.label" value="cuenta"/>
-			<property name="com.jaspersoft.studio.field.tree.path" value="view_transaction_history"/>
-		</field>
-		<field name="banco" class="java.lang.Integer">
-			<property name="com.jaspersoft.studio.field.name" value="banco"/>
-			<property name="com.jaspersoft.studio.field.label" value="banco"/>
-			<property name="com.jaspersoft.studio.field.tree.path" value="view_transaction_history"/>
-		</field>
-		<field name="moneda" class="java.lang.String">
-			<property name="com.jaspersoft.studio.field.name" value="moneda"/>
-			<property name="com.jaspersoft.studio.field.label" value="moneda"/>
-			<property name="com.jaspersoft.studio.field.tree.path" value="view_transaction_history"/>
-		</field>
-		<field name="tasa_cambio" class="java.lang.Double">
-			<property name="com.jaspersoft.studio.field.name" value="tasa_cambio"/>
-			<property name="com.jaspersoft.studio.field.label" value="tasa_cambio"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="view_transaction_history"/>
 		</field>
 		<group name="dbid">
@@ -253,12 +239,7 @@ inner join bancos."SBI_BANCO" sb on sb."BNC_BANCO" = c."BNC_BANCO"
 		<property name="com.jaspersoft.studio.field.label" value="BNC_IMAGEN"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="SBI_BANCO"/>
 	</field>
-	<field name="bnc_tasa_cambio" class="java.lang.Double">
-		<property name="com.jaspersoft.studio.field.name" value="bnc_tasa_cambio"/>
-		<property name="com.jaspersoft.studio.field.label" value="bnc_tasa_cambio"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="SBI_BANCO"/>
-	</field>
-	<field name="COLUMN_19" class="java.lang.Integer">
+	<field name="COLUMN_18" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="MND_MONEDA"/>
 		<property name="com.jaspersoft.studio.field.label" value="MND_MONEDA"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="SBI_MONEDA"/>
@@ -273,7 +254,7 @@ inner join bancos."SBI_BANCO" sb on sb."BNC_BANCO" = c."BNC_BANCO"
 		<property name="com.jaspersoft.studio.field.label" value="MND_ABREVIATURA"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="SBI_MONEDA"/>
 	</field>
-	<field name="COLUMN_22" class="java.lang.Integer">
+	<field name="COLUMN_21" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="TCN_TIPO_CUENTA"/>
 		<property name="com.jaspersoft.studio.field.label" value="TCN_TIPO_CUENTA"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="SBI_TIPO_CUENTA"/>
@@ -292,17 +273,17 @@ inner join bancos."SBI_BANCO" sb on sb."BNC_BANCO" = c."BNC_BANCO"
 				<reportElement mode="Opaque" x="0" y="100" width="555" height="32" forecolor="#000000" backcolor="#000103" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4"/>
 				<textField pattern="EEEEE dd MMMMM yyyy">
 					<reportElement x="400" y="6" width="153" height="20" forecolor="#FFFFFF" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
-					<textElement textAlignment="Right">
+					<textElement textAlignment="Right" verticalAlignment="Middle">
 						<font size="12"/>
 					</textElement>
 					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 				</textField>
 				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement x="0" y="5" width="390" height="20" forecolor="#FFFFFF" uuid="a2e97887-85d4-41ae-a5e5-321abf1c390b"/>
+					<reportElement x="0" y="6" width="390" height="20" forecolor="#FFFFFF" uuid="582c8515-3051-43ba-a246-839335c6fa41"/>
 					<textElement textAlignment="Justified" verticalAlignment="Middle">
 						<font size="12"/>
 					</textElement>
-					<textFieldExpression><![CDATA["ESTADO DE CUENTA - " + $F{CNT_NOMBRE}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["REPORTE DE EGRESOS EN CUENTA - " + $F{CNT_NUMERO_CUENTA}]]></textFieldExpression>
 				</textField>
 			</frame>
 			<image>
@@ -319,6 +300,18 @@ inner join bancos."SBI_BANCO" sb on sb."BNC_BANCO" = c."BNC_BANCO"
 	</columnHeader>
 	<detail>
 		<band height="420" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="110" height="20" forecolor="#FFFFFF" backcolor="rgba(0, 134, 243, 0.98039216)" uuid="09e94470-e567-4629-9e8f-caddf84439d7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número de Cuenta:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="117" y="0" width="153" height="20" uuid="60b637c7-f363-4155-a9d8-a34de90e74ad"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{CNT_NUMERO_CUENTA}]]></textFieldExpression>
+			</textField>
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="31" width="110" height="20" forecolor="#FFFFFF" backcolor="rgba(0, 134, 243, 0.98039216)" uuid="bf5f9be7-48a3-407e-a6c9-6e5815f19512"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -392,7 +385,7 @@ inner join bancos."SBI_BANCO" sb on sb."BNC_BANCO" = c."BNC_BANCO"
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField isBlankWhenNull="true">
+							<textField>
 								<reportElement x="0" y="0" width="56" height="30" uuid="4bd57af8-01f6-4a56-8c78-4e6912ff32ca"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
@@ -411,7 +404,7 @@ inner join bancos."SBI_BANCO" sb on sb."BNC_BANCO" = c."BNC_BANCO"
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField isBlankWhenNull="true">
+							<textField>
 								<reportElement x="0" y="0" width="94" height="30" uuid="70264944-2997-4b99-b75a-5d5aa072bca1"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{origen}]]></textFieldExpression>
@@ -430,18 +423,37 @@ inner join bancos."SBI_BANCO" sb on sb."BNC_BANCO" = c."BNC_BANCO"
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField isBlankWhenNull="true">
+							<textField>
 								<reportElement x="0" y="0" width="60" height="30" uuid="e8d96706-a2c7-4f39-a18b-0add70b1c906"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{documento}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="150" uuid="913564b8-9edc-4ae2-822c-4d0324140233">
+					<jr:column width="110" uuid="913564b8-9edc-4ae2-822c-4d0324140233">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
 						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
-								<reportElement mode="Opaque" x="0" y="0" width="150" height="30" forecolor="#FFFFFF" backcolor="#0086F3" uuid="4f2744cd-4a4d-40dc-b2b1-b08c4eb44abd"/>
+								<reportElement mode="Opaque" x="0" y="0" width="110" height="30" forecolor="#FFFFFF" backcolor="#0086F3" uuid="a2d91127-f99c-44c8-a1cf-40b1cc947971"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Tipo Documento]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="110" height="30" uuid="d01d2a55-215e-4043-82be-4b2fe6af850f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{tipo_documento}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="160" uuid="27a1e6ad-7476-4d9b-8981-141faf3e8d2a">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="160" height="30" forecolor="#FFFFFF" backcolor="#0086F3" uuid="4f2744cd-4a4d-40dc-b2b1-b08c4eb44abd"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font isBold="true"/>
 								</textElement>
@@ -449,91 +461,41 @@ inner join bancos."SBI_BANCO" sb on sb."BNC_BANCO" = c."BNC_BANCO"
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="150" height="30" uuid="e3d07398-51bf-407f-a923-0559ba50d9dd"/>
+							<textField>
+								<reportElement x="0" y="0" width="160" height="30" uuid="e3d07398-51bf-407f-a923-0559ba50d9dd"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="60" uuid="27a1e6ad-7476-4d9b-8981-141faf3e8d2a">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
-							<staticText>
-								<reportElement mode="Opaque" x="0" y="0" width="60" height="30" forecolor="#FFFFFF" backcolor="#0086F3" uuid="ead92ab1-1038-4b80-80c4-e0fd03d24f2b"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font isBold="true"/>
-								</textElement>
-								<text><![CDATA[Débito]]></text>
-							</staticText>
-						</jr:tableHeader>
-						<jr:detailCell style="Table_TD" height="30">
-							<textField pattern="¤#,##0.00;¤-#,##0.00" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="60" height="30" forecolor="#FF0703" uuid="225db08b-736d-4dea-9306-135c9de1bce2"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{tipo_operacion}.equals("RESTA")? $F{monto_transaccion} :""]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
-					<jr:column width="60" uuid="362a2638-1ff8-41fc-bdfa-e84759822888">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
-						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
-							<staticText>
-								<reportElement mode="Opaque" x="0" y="0" width="60" height="30" forecolor="#FFFFFF" backcolor="#0086F3" uuid="d8f5bab6-93f0-43df-8851-cb169413976b"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font isBold="true"/>
-								</textElement>
-								<text><![CDATA[Crédito]]></text>
-							</staticText>
-						</jr:tableHeader>
-						<jr:detailCell style="Table_TD" height="30">
-							<textField pattern="¤#,##0.00;¤-#,##0.00" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="60" height="30" forecolor="#018C12" uuid="d1cb2eb6-8d7b-4920-b2c2-2c71fb7a4558"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{tipo_operacion}.equals("SUMA")? $F{monto_transaccion} :""]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
 					<jr:column width="75" uuid="c35a5116-bb26-4fd2-b9e9-e6eaf0f47c73">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column7"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column6"/>
 						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement mode="Opaque" x="0" y="0" width="75" height="30" forecolor="#FFFFFF" backcolor="#0086F3" uuid="105e49ff-f746-4131-a255-a03ebaa7e454"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font isBold="true"/>
 								</textElement>
-								<text><![CDATA[Saldo]]></text>
+								<text><![CDATA[Monto]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField pattern="¤#,##0.00;¤-#,##0.00" isBlankWhenNull="true">
+							<textField pattern="¤#,##0.00;¤-#,##0.00">
 								<reportElement x="0" y="0" width="75" height="30" uuid="f1d065fd-d431-4d87-84bb-360144666d9d"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{nuevo_monto}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{monto_transaccion}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
 				</jr:table>
 			</componentElement>
-			<staticText>
-				<reportElement mode="Opaque" x="0" y="4" width="110" height="20" forecolor="#FFFFFF" backcolor="rgba(0, 134, 243, 0.98039216)" uuid="de832e6a-327c-4d76-9dc5-43614edc43c5"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-				</textElement>
-				<text><![CDATA[Número de Cuenta:]]></text>
-			</staticText>
 			<textField>
-				<reportElement x="117" y="4" width="153" height="20" uuid="7ca11a86-d5a2-44c8-a6c2-88a137daef57"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[$F{CNT_NUMERO_CUENTA}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="397" y="4" width="153" height="20" uuid="d499b542-a371-4259-9a46-cea4bd15c763"/>
+				<reportElement x="397" y="0" width="153" height="20" uuid="22863cfd-6d3f-40dd-bbc4-97a9d6b57cd0"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{TCN_NOMBRE}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Opaque" x="280" y="4" width="110" height="20" forecolor="#FFFFFF" backcolor="rgba(0, 134, 243, 0.98039216)" uuid="f204d9f2-3898-4ee9-bb6c-71841555267f"/>
+				<reportElement mode="Opaque" x="280" y="0" width="110" height="20" forecolor="#FFFFFF" backcolor="rgba(0, 134, 243, 0.98039216)" uuid="f52c8892-dee2-4527-bf4d-b22a5dc48747"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>

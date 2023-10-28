@@ -109,6 +109,21 @@ and fecha <= $P{FINAL_DATE}
 			<property name="com.jaspersoft.studio.field.label" value="cuenta"/>
 			<property name="com.jaspersoft.studio.field.tree.path" value="view_transaction_history"/>
 		</field>
+		<field name="banco" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="banco"/>
+			<property name="com.jaspersoft.studio.field.label" value="banco"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="view_transaction_history"/>
+		</field>
+		<field name="moneda" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="moneda"/>
+			<property name="com.jaspersoft.studio.field.label" value="moneda"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="view_transaction_history"/>
+		</field>
+		<field name="tasa_cambio" class="java.lang.Double">
+			<property name="com.jaspersoft.studio.field.name" value="tasa_cambio"/>
+			<property name="com.jaspersoft.studio.field.label" value="tasa_cambio"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="view_transaction_history"/>
+		</field>
 		<group name="dbid">
 			<groupExpression><![CDATA[$F{dbid}]]></groupExpression>
 		</group>
@@ -239,7 +254,12 @@ inner join bancos."SBI_BANCO" sb on sb."BNC_BANCO" = c."BNC_BANCO"
 		<property name="com.jaspersoft.studio.field.label" value="BNC_IMAGEN"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="SBI_BANCO"/>
 	</field>
-	<field name="COLUMN_18" class="java.lang.Integer">
+	<field name="bnc_tasa_cambio" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="bnc_tasa_cambio"/>
+		<property name="com.jaspersoft.studio.field.label" value="bnc_tasa_cambio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="SBI_BANCO"/>
+	</field>
+	<field name="COLUMN_19" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="MND_MONEDA"/>
 		<property name="com.jaspersoft.studio.field.label" value="MND_MONEDA"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="SBI_MONEDA"/>
@@ -254,7 +274,7 @@ inner join bancos."SBI_BANCO" sb on sb."BNC_BANCO" = c."BNC_BANCO"
 		<property name="com.jaspersoft.studio.field.label" value="MND_ABREVIATURA"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="SBI_MONEDA"/>
 	</field>
-	<field name="COLUMN_21" class="java.lang.Integer">
+	<field name="COLUMN_22" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.name" value="TCN_TIPO_CUENTA"/>
 		<property name="com.jaspersoft.studio.field.label" value="TCN_TIPO_CUENTA"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="SBI_TIPO_CUENTA"/>
@@ -385,7 +405,7 @@ inner join bancos."SBI_BANCO" sb on sb."BNC_BANCO" = c."BNC_BANCO"
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="56" height="30" uuid="4bd57af8-01f6-4a56-8c78-4e6912ff32ca"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
@@ -404,7 +424,7 @@ inner join bancos."SBI_BANCO" sb on sb."BNC_BANCO" = c."BNC_BANCO"
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="94" height="30" uuid="70264944-2997-4b99-b75a-5d5aa072bca1"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{origen}]]></textFieldExpression>
@@ -423,7 +443,7 @@ inner join bancos."SBI_BANCO" sb on sb."BNC_BANCO" = c."BNC_BANCO"
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="60" height="30" uuid="e8d96706-a2c7-4f39-a18b-0add70b1c906"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{documento}]]></textFieldExpression>
@@ -442,7 +462,7 @@ inner join bancos."SBI_BANCO" sb on sb."BNC_BANCO" = c."BNC_BANCO"
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="110" height="30" uuid="d01d2a55-215e-4043-82be-4b2fe6af850f"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{tipo_documento}]]></textFieldExpression>
@@ -461,7 +481,7 @@ inner join bancos."SBI_BANCO" sb on sb."BNC_BANCO" = c."BNC_BANCO"
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="160" height="30" uuid="e3d07398-51bf-407f-a923-0559ba50d9dd"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
@@ -480,7 +500,7 @@ inner join bancos."SBI_BANCO" sb on sb."BNC_BANCO" = c."BNC_BANCO"
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField pattern="¤#,##0.00;¤-#,##0.00">
+							<textField pattern="¤#,##0.00;¤-#,##0.00" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="75" height="30" uuid="f1d065fd-d431-4d87-84bb-360144666d9d"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{monto_transaccion}]]></textFieldExpression>

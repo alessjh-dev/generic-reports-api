@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Cherry" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13acf49e-4913-4d1b-bccc-113817ad15d1">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#1C59FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Players" uuid="190488f4-07cc-48a9-8486-1012370c0516">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+		<parameter name="TEAM" class="java.lang.Integer"/>
+		<queryString language="SQL">
+			<![CDATA[
+select j.*, i.fecha_suspension from torneo.jugador j
+left join incidencias i on (i.jugador = j.dbid AND i.fecha_suspension IS NOT NULL)
+where equipo =  $P{TEAM} ]]>
+		</queryString>
+		<field name="dbid" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="dbid"/>
+			<property name="com.jaspersoft.studio.field.label" value="dbid"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="jugador"/>
+		</field>
+		<field name="nombres" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="nombres"/>
+			<property name="com.jaspersoft.studio.field.label" value="nombres"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="jugador"/>
+		</field>
+		<field name="apellidos" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="apellidos"/>
+			<property name="com.jaspersoft.studio.field.label" value="apellidos"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="jugador"/>
+		</field>
+		<field name="fecha_nacimiento" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.name" value="fecha_nacimiento"/>
+			<property name="com.jaspersoft.studio.field.label" value="fecha_nacimiento"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="jugador"/>
+		</field>
+		<field name="foto" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="foto"/>
+			<property name="com.jaspersoft.studio.field.label" value="foto"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="jugador"/>
+		</field>
+		<field name="equipo" class="java.lang.Integer">
+			<property name="com.jaspersoft.studio.field.name" value="equipo"/>
+			<property name="com.jaspersoft.studio.field.label" value="equipo"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="jugador"/>
+		</field>
+		<field name="fecha_suspension" class="java.sql.Date">
+			<property name="com.jaspersoft.studio.field.name" value="fecha_suspension"/>
+			<property name="com.jaspersoft.studio.field.label" value="fecha_suspension"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="incidencias"/>
+		</field>
+		<group name="foto">
+			<groupExpression><![CDATA[$F{foto}]]></groupExpression>
+		</group>
+		<group name="dbid">
+			<groupExpression><![CDATA[$F{dbid}]]></groupExpression>
+		</group>
+		<group name="nombres">
+			<groupExpression><![CDATA[$F{nombres}]]></groupExpression>
+		</group>
+		<group name="apellidos">
+			<groupExpression><![CDATA[$F{apellidos}]]></groupExpression>
+		</group>
+		<group name="fecha_nacimiento">
+			<groupExpression><![CDATA[$F{fecha_nacimiento}]]></groupExpression>
+		</group>
+		<group name="fecha_suspension">
+			<groupExpression><![CDATA[$F{fecha_suspension}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="PARAMS" class="java.util.Map"/>
+	<parameter name="TEAM" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[$P{PARAMS}.get("id")]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[select * from torneo.equipo where dbid =  $P{TEAM} ]]>
+	</queryString>
+	<field name="dbid" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="dbid"/>
+		<property name="com.jaspersoft.studio.field.label" value="dbid"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="equipo"/>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="equipo"/>
+	</field>
+	<field name="abreviatura" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="abreviatura"/>
+		<property name="com.jaspersoft.studio.field.label" value="abreviatura"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="equipo"/>
+	</field>
+	<field name="ciudad" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ciudad"/>
+		<property name="com.jaspersoft.studio.field.label" value="ciudad"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="equipo"/>
+	</field>
+	<field name="entrenador" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="entrenador"/>
+		<property name="com.jaspersoft.studio.field.label" value="entrenador"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="equipo"/>
+	</field>
+	<field name="estadio" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="estadio"/>
+		<property name="com.jaspersoft.studio.field.label" value="estadio"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="equipo"/>
+	</field>
+	<field name="foto" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="foto"/>
+		<property name="com.jaspersoft.studio.field.label" value="foto"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="equipo"/>
+	</field>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{dbid}]]></groupExpression>
+		<groupHeader>
+			<band height="37">
+				<frame>
+					<reportElement mode="Opaque" x="0" y="7" width="555" height="30" forecolor="#B89F7D" backcolor="#000000" uuid="0a5fc4ac-2e39-4b7a-8f96-59f8eb2df66d"/>
+					<staticText>
+						<reportElement x="70" y="1" width="400" height="28" forecolor="#FFFFFF" uuid="00e2496a-4b00-4b7a-8455-d62288616d36"/>
+						<textElement textAlignment="Center" verticalAlignment="Top">
+							<font size="16"/>
+						</textElement>
+						<text><![CDATA[Reporte de Jugadores por Equipo]]></text>
+					</staticText>
+				</frame>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[$F{nombre}]]></groupExpression>
+	</group>
+	<group name="abreviatura">
+		<groupExpression><![CDATA[$F{abreviatura}]]></groupExpression>
+	</group>
+	<group name="ciudad">
+		<groupExpression><![CDATA[$F{ciudad}]]></groupExpression>
+	</group>
+	<group name="entrenador">
+		<groupExpression><![CDATA[$F{entrenador}]]></groupExpression>
+	</group>
+	<group name="estadio">
+		<groupExpression><![CDATA[$F{estadio}]]></groupExpression>
+	</group>
+	<group name="foto">
+		<groupExpression><![CDATA[$F{foto}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="1" y="100" width="553" height="32" forecolor="#000000" backcolor="#01780D" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="408" y="6" width="144" height="20" forecolor="#FFFFFF" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<image>
+				<reportElement x="433" y="0" width="117" height="90" uuid="21a28563-c35e-4842-9b35-66ce8b8ce4e1"/>
+				<imageExpression><![CDATA["C:/Users/eajua/OneDrive/Documentos/PROJECTS/soccer-tournament-web/public/images/futsala.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="50" y="25" width="373" height="40" uuid="38bb4a75-e976-4f96-be65-f3060118d913"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SOCCERMANIA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="537" splitType="Stretch">
+			<image>
+				<reportElement x="405" y="40" width="43" height="40" uuid="3580bc7b-27d0-481a-b71c-a49cbe60d963"/>
+				<imageExpression><![CDATA["C:\\Users\\eajua\\OneDrive\\Documentos\\PROJECTS\\soccer-tournament-web\\public\\images\\" + $F{foto}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="75" y="40" width="323" height="41" uuid="4291df03-e692-4e17-b518-65cb0f42429a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="19" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="2" y="121" width="553" height="299" uuid="c36151ac-a462-43c5-af68-ea8fd8f1c8d5">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Players" uuid="201ef0e5-dee6-4aa5-b165-420eb5b847ab">
+						<datasetParameter name="TEAM">
+							<datasetParameterExpression><![CDATA[$P{TEAM}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="30" uuid="873bc4ed-e413-4004-a610-a70309f0a1f5">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="30" height="30" forecolor="#FFFFFF" backcolor="#3063FC" uuid="eba5186d-2749-4585-b94a-731fd4459ff2"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<image>
+								<reportElement x="0" y="0" width="30" height="30" uuid="38a4cfc4-0376-42df-92af-1d35cc5f001d"/>
+								<imageExpression><![CDATA["C:\\Users\\eajua\\OneDrive\\Documentos\\PROJECTS\\soccer-tournament-web\\public\\fotos\\" + $F{foto} ]]></imageExpression>
+							</image>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="c2b98c97-b939-4806-8771-354ea55de4fc">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="50" height="30" forecolor="#FFFFFF" backcolor="#3063FC" uuid="86827388-1b7a-4a4d-a885-95b3812263d0"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Número]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="50" height="30" uuid="f7692074-367c-4e3f-bb86-ae9d50ab31d2"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{dbid}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="140" uuid="91e1d4f5-1eb8-406e-a6f3-a9819acb82c2">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="140" height="30" forecolor="#FFFFFF" backcolor="#3063FC" uuid="46a393f7-7a24-4124-9013-49444062fce5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Nombres]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="140" height="30" uuid="14c76e6e-956e-442a-99fc-b25d1a4cda4f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{nombres}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="130" uuid="8d27ff39-37bf-41e0-bfab-a16af3f96bd2">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="130" height="30" forecolor="#FFFFFF" backcolor="#3063FC" uuid="1b93d69b-14a9-4dc9-8c1d-8d72f877f4ca"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Apellidos]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="130" height="30" uuid="fbf760f1-f22d-4771-8846-516a6a67eb9b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{apellidos}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="bfa3c646-c802-4e03-a24b-04e931b89528">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FFFFFF" backcolor="#3063FC" uuid="ca16ac59-c46a-4a0c-b4ef-45284f41edcc"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Fecha de Nacimiento]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="80" height="30" uuid="c4ffca99-709b-4a8b-97fe-beb44478ba45"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{fecha_nacimiento})
+]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="123" uuid="a15d4b8b-7d0d-46c6-92f9-03d2eb864b07">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="123" height="30" forecolor="#FFFFFF" backcolor="#3063FC" uuid="eebaacc4-5cec-42ee-8fe5-b47ff787ed2c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="123" height="30" uuid="db697172-0d72-440d-9ca8-acf7483db48d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{fecha_suspension} != null? "Jugador suspendido en la jornada del " + $F{fecha_suspension}: ""]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000" uuid="729c3539-f946-4d0e-a0a7-bda2815ea1b0"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="513" y="0" width="40" height="20" forecolor="#FFFFFF" uuid="4834e99c-7f6c-485a-b098-50e5187f2ab4"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="433" y="0" width="80" height="20" forecolor="#FFFFFF" uuid="9825b46e-76f1-469a-abb8-a1cc27aad685"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="1" width="197" height="20" forecolor="#FFFFFF" uuid="137d38c7-1a83-4fc5-b156-9d5f1b1a0ddc"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

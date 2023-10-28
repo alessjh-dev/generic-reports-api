@@ -14,6 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/reports")
+@CrossOrigin
 public class ReportRs {
 
     @Autowired
